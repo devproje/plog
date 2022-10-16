@@ -4,7 +4,7 @@ type Level string
 
 const (
 	Info  Level = "INFO"
-	Fine  Level = "FINE"
 	Warn  Level = "WARN"
-	Error Level = "ERROR"
+	Error Level = "ERRO"
+	Fatal Level = "FATA"
 )

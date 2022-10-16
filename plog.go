@@ -2,12 +2,13 @@ package plog
 
 import (
 	"fmt"
-	"github.com/devproje/plog/color"
-	"github.com/devproje/plog/level"
 	"io"
 	"log"
 	"os"
 	"time"
+
+	"github.com/devproje/plog/color"
+	"github.com/devproje/plog/level"
 )
 
 var (
@@ -19,7 +20,7 @@ func init() {
 }
 
 func indicator(c color.Color, lev level.Level) string {
-	return fmt.Sprintf("%s%s%s[%s] ", c, lev, color.RESET, timestamp())
+	return fmt.Sprintf("%s%s%s[%s]", c, lev, color.RESET, timestamp())
 }
 
 func timestamp() string {
@@ -30,12 +31,13 @@ func logging(lev level.Level, str string) {
 	switch lev {
 	case level.Info:
 		logger.Printf("%s %s", indicator(color.CYAN, level.Info), str)
-	case level.Fine:
-		logger.Printf("%s %s", indicator(color.CYAN, level.Fine), str)
-	case level.Error:
-		logger.Printf("%s %s", indicator(color.RED, level.Error), str)
 	case level.Warn:
 		logger.Printf("%s %s", indicator(color.YELLOW, level.Warn), str)
+	case level.Error:
+		logger.Printf("%s %s", indicator(color.RED, level.Error), str)
+	case level.Fatal:
+		logger.Printf("%s %s", indicator(color.CYAN, level.Fatal), str)
+		os.Exit(1)
 	}
 }
 

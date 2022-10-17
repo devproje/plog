@@ -1,10 +1,13 @@
 package level
 
-type Level string
+type Level int
 
 const (
-	Info  Level = "INFO"
-	Warn  Level = "WARN"
-	Error Level = "ERRO"
-	Fatal Level = "FATA"
+	Panic Level = iota
+	Fatal
+	Error
+	Warn
+	Info
+	Debug
+	Trace
 )

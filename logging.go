@@ -10,6 +10,18 @@ func Log(lev level.Level, v ...any) {
 	logging(lev, fmt.Sprint(v...))
 }
 
+func Print(v ...any) {
+	Info(v...)
+}
+
+func Trace(v ...any) {
+	Log(level.Trace, v...)
+}
+
+func Debug(v ...any) {
+	Log(level.Debug, v...)
+}
+
 func Info(v ...any) {
 	Log(level.Info, v...)
 }
@@ -26,8 +38,24 @@ func Fatal(v ...any) {
 	Log(level.Fatal, v...)
 }
 
+func Panic(v ...any) {
+	Log(level.Panic, v...)
+}
+
 func Logf(lev level.Level, format string, args ...any) {
 	logging(lev, fmt.Sprintf(format, args...))
+}
+
+func Printf(format string, args ...any) {
+	Infof(format, args...)
+}
+
+func Tracef(format string, args ...any) {
+	Logf(level.Trace, format, args...)
+}
+
+func Debugf(format string, args ...any) {
+	Logf(level.Debug, format, args...)
 }
 
 func Infof(format string, args ...any) {
@@ -46,8 +74,24 @@ func Fatalf(format string, args ...any) {
 	Logf(level.Fatal, format, args...)
 }
 
+func Panicf(format string, args ...any) {
+	Logf(level.Panic, format, args...)
+}
+
 func Logln(lev level.Level, v ...any) {
 	logging(lev, fmt.Sprintln(v...))
+}
+
+func Println(v ...any) {
+	Infoln(v...)
+}
+
+func Traceln(v ...any) {
+	Logln(level.Trace, v...)
+}
+
+func Debugln(v ...any) {
+	Logln(level.Debug, v...)
 }
 
 func Infoln(v ...any) {
@@ -64,4 +108,8 @@ func Errorln(v ...any) {
 
 func Fatalln(v ...any) {
 	Logln(level.Fatal, v...)
+}
+
+func Panicln(v ...any) {
+	Logln(level.Panic, v...)
 }

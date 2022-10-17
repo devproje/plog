@@ -4,4 +4,4 @@ init:
 	go mod tidy
 
 publish:
-	./publish.sh $(TAG)
+	./scripts/publish.sh $(TAG)

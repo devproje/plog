@@ -11,4 +11,5 @@ const (
 	PURPLE Color = "\033[35m"
 	CYAN   Color = "\033[36m"
 	WHITE  Color = "\033[37m"
+	GRAY   Color = "\033[38;5;7m"
 )

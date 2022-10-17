@@ -1,46 +1,58 @@
 package plog
 
 import (
-	"fmt"
 	"io"
 	"log"
 	"os"
-	"time"
 
-	"github.com/devproje/plog/color"
 	"github.com/devproje/plog/level"
 )
 
 var (
-	logger *log.Logger
+	logger      *log.Logger
+	loggerLevel = level.Info
 )
 
 func init() {
 	logger = log.New(os.Stdout, "", 0)
 }
 
-func indicator(c color.Color, lev level.Level) string {
-	return fmt.Sprintf("%s%s%s[%s]", c, lev, color.RESET, timestamp())
+func fatalHandle() {
+	os.Exit(1)
 }
 
-func timestamp() string {
-	return time.Now().Format(time.RFC3339)
-}
+func logging(lev level.Level, message string) {
+	if loggerLevel < lev {
+		if loggerLevel == level.Fatal {
+			fatalHandle()
+		}
 
-func logging(lev level.Level, str string) {
+		return
+	}
+
 	switch lev {
+	case level.Trace:
+		logger.Printf("%s %s", prefix(traceTag), message)
+	case level.Debug:
+		logger.Printf("%s %s", prefix(debugTag), message)
 	case level.Info:
-		logger.Printf("%s %s", indicator(color.CYAN, level.Info), str)
+		logger.Printf("%s %s", prefix(infoTag), message)
 	case level.Warn:
-		logger.Printf("%s %s", indicator(color.YELLOW, level.Warn), str)
+		logger.Printf("%s %s", prefix(warnTag), message)
 	case level.Error:
-		logger.Printf("%s %s", indicator(color.RED, level.Error), str)
+		logger.Printf("%s %s", prefix(errorTag), message)
 	case level.Fatal:
-		logger.Printf("%s %s", indicator(color.CYAN, level.Fatal), str)
-		os.Exit(1)
+		logger.Printf("%s %s", prefix(fatalTag), message)
+		fatalHandle()
+	case level.Panic:
+		logger.Panicf("%s %s", prefix(panicTag), message)
 	}
 }
 
 func SetOutput(writers ...io.Writer) {
 	logger.SetOutput(io.MultiWriter(writers...))
+}
+
+func SetLevel(lev level.Level) {
+	loggerLevel = lev
 }

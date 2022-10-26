@@ -17,8 +17,8 @@ func SetLevel(lev level.Level) {
 	p.Level = lev
 }
 
-func SetTimestamp(t bool) {
-	p.DisableTimestamp = !t
+func SetTimestamp(enable bool) {
+	p.DisableTimestamp = !enable
 }
 
 func SetTimeFormat(f string) {

@@ -1,3 +1,3 @@
-module github.com/devproje/plog/v2
+module github.com/devproje/plog
 
 go 1.19

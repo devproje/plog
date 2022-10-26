@@ -3,7 +3,7 @@ package plog
 import (
 	"fmt"
 
-	"github.com/devproje/plog/v2/level"
+	"github.com/devproje/plog/level"
 )
 
 func (pl *Plog) Log(lev level.Level, v ...any) {

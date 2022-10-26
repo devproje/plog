@@ -6,110 +6,110 @@ import (
 	"github.com/devproje/plog/level"
 )
 
-func Log(lev level.Level, v ...any) {
-	logging(lev, fmt.Sprint(v...))
+func (pl *Plog) Log(lev level.Level, v ...any) {
+	pl.logging(lev, fmt.Sprint(v...))
 }
 
-func Print(v ...any) {
-	Info(v...)
+func (pl *Plog) Print(v ...any) {
+	pl.Info(v...)
 }
 
-func Trace(v ...any) {
-	Log(level.Trace, v...)
+func (pl *Plog) Trace(v ...any) {
+	pl.Log(level.Trace, v...)
 }
 
-func Debug(v ...any) {
-	Log(level.Debug, v...)
+func (pl *Plog) Debug(v ...any) {
+	pl.Log(level.Debug, v...)
 }
 
-func Info(v ...any) {
-	Log(level.Info, v...)
+func (pl *Plog) Info(v ...any) {
+	pl.Log(level.Info, v...)
 }
 
-func Warn(v ...any) {
-	Log(level.Warn, v...)
+func (pl *Plog) Warn(v ...any) {
+	pl.Log(level.Warn, v...)
 }
 
-func Error(v ...any) {
-	Log(level.Error, v...)
+func (pl *Plog) Error(v ...any) {
+	pl.Log(level.Error, v...)
 }
 
-func Fatal(v ...any) {
-	Log(level.Fatal, v...)
+func (pl *Plog) Fatal(v ...any) {
+	pl.Log(level.Fatal, v...)
 }
 
-func Panic(v ...any) {
-	Log(level.Panic, v...)
+func (pl *Plog) Panic(v ...any) {
+	pl.Log(level.Panic, v...)
 }
 
-func Logf(lev level.Level, format string, args ...any) {
-	logging(lev, fmt.Sprintf(format, args...))
+func (pl *Plog) Logf(lev level.Level, format string, args ...any) {
+	pl.logging(lev, fmt.Sprintf(format, args...))
 }
 
-func Printf(format string, args ...any) {
-	Infof(format, args...)
+func (pl *Plog) Printf(format string, args ...any) {
+	pl.Infof(format, args...)
 }
 
-func Tracef(format string, args ...any) {
-	Logf(level.Trace, format, args...)
+func (pl *Plog) Tracef(format string, args ...any) {
+	pl.Logf(level.Trace, format, args...)
 }
 
-func Debugf(format string, args ...any) {
-	Logf(level.Debug, format, args...)
+func (pl *Plog) Debugf(format string, args ...any) {
+	pl.Logf(level.Debug, format, args...)
 }
 
-func Infof(format string, args ...any) {
-	Logf(level.Info, format, args...)
+func (pl *Plog) Infof(format string, args ...any) {
+	pl.Logf(level.Info, format, args...)
 }
 
-func Warnf(format string, args ...any) {
-	Logf(level.Warn, format, args...)
+func (pl *Plog) Warnf(format string, args ...any) {
+	pl.Logf(level.Warn, format, args...)
 }
 
-func Errorf(format string, args ...any) {
-	Logf(level.Error, format, args...)
+func (pl *Plog) Errorf(format string, args ...any) {
+	pl.Logf(level.Error, format, args...)
 }
 
-func Fatalf(format string, args ...any) {
-	Logf(level.Fatal, format, args...)
+func (pl *Plog) Fatalf(format string, args ...any) {
+	pl.Logf(level.Fatal, format, args...)
 }
 
-func Panicf(format string, args ...any) {
-	Logf(level.Panic, format, args...)
+func (pl *Plog) Panicf(format string, args ...any) {
+	pl.Logf(level.Panic, format, args...)
 }
 
-func Logln(lev level.Level, v ...any) {
-	logging(lev, fmt.Sprintln(v...))
+func (pl *Plog) Logln(lev level.Level, v ...any) {
+	pl.logging(lev, fmt.Sprintln(v...))
 }
 
-func Println(v ...any) {
-	Infoln(v...)
+func (pl *Plog) Println(v ...any) {
+	pl.Infoln(v...)
 }
 
-func Traceln(v ...any) {
-	Logln(level.Trace, v...)
+func (pl *Plog) Traceln(v ...any) {
+	pl.Logln(level.Trace, v...)
 }
 
-func Debugln(v ...any) {
-	Logln(level.Debug, v...)
+func (pl *Plog) Debugln(v ...any) {
+	pl.Logln(level.Debug, v...)
 }
 
-func Infoln(v ...any) {
-	Logln(level.Info, v...)
+func (pl *Plog) Infoln(v ...any) {
+	pl.Logln(level.Info, v...)
 }
 
-func Warnln(v ...any) {
-	Logln(level.Warn, v...)
+func (pl *Plog) Warnln(v ...any) {
+	pl.Logln(level.Warn, v...)
 }
 
-func Errorln(v ...any) {
-	Logln(level.Error, v...)
+func (pl *Plog) Errorln(v ...any) {
+	pl.Logln(level.Error, v...)
 }
 
-func Fatalln(v ...any) {
-	Logln(level.Fatal, v...)
+func (pl *Plog) Fatalln(v ...any) {
+	pl.Logln(level.Fatal, v...)
 }
 
-func Panicln(v ...any) {
-	Logln(level.Panic, v...)
+func (pl *Plog) Panicln(v ...any) {
+	pl.Logln(level.Panic, v...)
 }

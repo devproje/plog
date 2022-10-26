@@ -6,24 +6,19 @@ import (
 	"time"
 )
 
-var (
-	disableTimestamp = false
-	format           = time.RFC3339
-)
-
-func timestamp() string {
-	return fmt.Sprintf("[%s]", time.Now().Format(format))
+func (pl *Plog) timestamp() string {
+	return fmt.Sprintf("[%s]", time.Now().Format(pl.TimestampFormat))
 }
 
 // DisableTimeStamp	turn off timestamp
-func SetTimestamp(t bool) {
-	disableTimestamp = !t
+func (pl *Plog) SetTimestamp(t bool) {
+	pl.DisableTimestamp = !t
 }
 
 // SetTimeFormat set time format
 // If you want a using custom formatter, please use TimeFormatter(f string) function
-func SetTimeFormat(f string) {
-	format = f
+func (pl *Plog) SetTimeFormat(f string) {
+	pl.TimestampFormat = f
 }
 
 // TimeFormatter string time custom formatter

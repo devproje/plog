@@ -4,26 +4,34 @@ import (
 	"io"
 	"log"
 	"os"
+	"time"
 
 	"github.com/devproje/plog/level"
 )
 
-var (
-	logger      *log.Logger
-	loggerLevel = level.Info
-)
+type Plog struct {
+	Logger           *log.Logger
+	Level            level.Level
+	DisableTimestamp bool
+	TimestampFormat  string
+}
 
-func init() {
-	logger = log.New(os.Stdout, "", 0)
+func New() *Plog {
+	return &Plog{
+		log.New(os.Stdout, "", 0),
+		level.Info,
+		false,
+		time.RFC3339,
+	}
 }
 
 func fatalHandle() {
 	os.Exit(1)
 }
 
-func logging(lev level.Level, message string) {
-	if loggerLevel < lev {
-		if loggerLevel == level.Fatal {
+func (pl *Plog) logging(lev level.Level, message string) {
+	if pl.Level < lev {
+		if pl.Level == level.Fatal {
 			fatalHandle()
 		}
 
@@ -32,27 +40,27 @@ func logging(lev level.Level, message string) {
 
 	switch lev {
 	case level.Trace:
-		logger.Printf("%s %s", prefix(traceTag), message)
+		pl.Logger.Printf("%s %s", pl.prefix(traceTag), message)
 	case level.Debug:
-		logger.Printf("%s %s", prefix(debugTag), message)
+		pl.Logger.Printf("%s %s", pl.prefix(debugTag), message)
 	case level.Info:
-		logger.Printf("%s %s", prefix(infoTag), message)
+		pl.Logger.Printf("%s %s", pl.prefix(infoTag), message)
 	case level.Warn:
-		logger.Printf("%s %s", prefix(warnTag), message)
+		pl.Logger.Printf("%s %s", pl.prefix(warnTag), message)
 	case level.Error:
-		logger.Printf("%s %s", prefix(errorTag), message)
+		pl.Logger.Printf("%s %s", pl.prefix(errorTag), message)
 	case level.Fatal:
-		logger.Printf("%s %s", prefix(fatalTag), message)
+		pl.Logger.Printf("%s %s", pl.prefix(fatalTag), message)
 		fatalHandle()
 	case level.Panic:
-		logger.Panicf("%s %s", prefix(panicTag), message)
+		pl.Logger.Panicf("%s %s", pl.prefix(panicTag), message)
 	}
 }
 
-func SetOutput(writers ...io.Writer) {
-	logger.SetOutput(io.MultiWriter(writers...))
+func (pl *Plog) SetOutput(writer io.Writer) {
+	pl.Logger.SetOutput(writer)
 }
 
-func SetLevel(lev level.Level) {
-	loggerLevel = lev
+func (pl *Plog) SetLevel(lev level.Level) {
+	pl.Level = lev
 }

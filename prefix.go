@@ -18,10 +18,10 @@ const (
 	panicTag = tag(color.RED + "PANI")
 )
 
-func prefix(t tag) string {
+func (pl *Plog) prefix(t tag) string {
 	i := fmt.Sprintf("%s%s", t, color.RESET)
-	if !disableTimestamp {
-		i += timestamp()
+	if !pl.DisableTimestamp {
+		i += pl.timestamp()
 	}
 
 	return i

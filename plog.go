@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/devproje/plog/level"
+	"github.com/devproje/plog/v2/level"
 )
 
 type Plog struct {

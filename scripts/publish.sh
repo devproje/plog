@@ -1,5 +1,5 @@
 #!/bin/sh
-MODULE=github.com/devproje/plog@$1
+MODULE=github.com/devproje/plog/v2/@$1
 PROXY_URL=proxy.golang.org
 
 if [ "$1" == "default" ]; then

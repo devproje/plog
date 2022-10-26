@@ -3,7 +3,7 @@ package plog
 import (
 	"fmt"
 
-	"github.com/devproje/plog/color"
+	"github.com/devproje/plog/v2/color"
 )
 
 type tag string

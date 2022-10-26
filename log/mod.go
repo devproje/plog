@@ -3,8 +3,8 @@ package log
 import (
 	"io"
 
-	"github.com/devproje/plog"
-	"github.com/devproje/plog/level"
+	"github.com/devproje/plog/v2"
+	"github.com/devproje/plog/v2/level"
 )
 
 var p *plog.Plog = plog.New()

@@ -1,11 +1,13 @@
 package plog
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
 	"time"
 
+	"github.com/devproje/plog/color"
 	"github.com/devproje/plog/level"
 )
 
@@ -25,14 +27,33 @@ func New() *Plog {
 	}
 }
 
-func fatalHandle() {
-	os.Exit(1)
-}
-
 func (pl *Plog) logging(lev level.Level, message string) {
+	type tag string
+	const (
+		traceTag = tag(color.GRAY + "TRAC")
+		debugTag = tag(color.GRAY + "DEBU")
+		infoTag  = tag(color.CYAN + "INFO")
+		warnTag  = tag(color.YELLOW + "WARN")
+		errorTag = tag(color.RED + "ERRO")
+		fatalTag = tag(color.RED + "FATA")
+		panicTag = tag(color.RED + "PANI")
+	)
+
+	var prefix = func(t tag) string {
+		i := fmt.Sprintf("%s%s", t, color.RESET)
+		if !pl.DisableTimestamp {
+			i += pl.timestamp()
+		}
+
+		return i
+	}
+	var fatal = func() {
+		os.Exit(1)
+	}
+
 	if pl.Level < lev {
 		if pl.Level == level.Fatal {
-			fatalHandle()
+			fatal()
 		}
 
 		return
@@ -40,20 +61,20 @@ func (pl *Plog) logging(lev level.Level, message string) {
 
 	switch lev {
 	case level.Trace:
-		pl.Logger.Printf("%s %s", pl.prefix(traceTag), message)
+		pl.Logger.Printf("%s %s", prefix(traceTag), message)
 	case level.Debug:
-		pl.Logger.Printf("%s %s", pl.prefix(debugTag), message)
+		pl.Logger.Printf("%s %s", prefix(debugTag), message)
 	case level.Info:
-		pl.Logger.Printf("%s %s", pl.prefix(infoTag), message)
+		pl.Logger.Printf("%s %s", prefix(infoTag), message)
 	case level.Warn:
-		pl.Logger.Printf("%s %s", pl.prefix(warnTag), message)
+		pl.Logger.Printf("%s %s", prefix(warnTag), message)
 	case level.Error:
-		pl.Logger.Printf("%s %s", pl.prefix(errorTag), message)
+		pl.Logger.Printf("%s %s", prefix(errorTag), message)
 	case level.Fatal:
-		pl.Logger.Printf("%s %s", pl.prefix(fatalTag), message)
-		fatalHandle()
+		pl.Logger.Printf("%s %s", prefix(fatalTag), message)
+		fatal()
 	case level.Panic:
-		pl.Logger.Panicf("%s %s", pl.prefix(panicTag), message)
+		pl.Logger.Panicf("%s %s", prefix(panicTag), message)
 	}
 }
 

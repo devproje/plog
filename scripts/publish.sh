@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 MODULE=github.com/devproje/plog@$1
 PROXY_URL=proxy.golang.org
 

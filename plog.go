@@ -27,7 +27,7 @@ func New() *Plog {
 	}
 }
 
-func (pl *Plog) logging(lev level.Level, message string) {
+func (pl *Plog) write(lev level.Level, message string) {
 	type tag string
 	const (
 		traceTag = tag(color.GRAY + "TRAC")
@@ -47,13 +47,10 @@ func (pl *Plog) logging(lev level.Level, message string) {
 
 		return i
 	}
-	var fatal = func() {
-		os.Exit(1)
-	}
 
 	if pl.Level < lev {
 		if pl.Level == level.Fatal {
-			fatal()
+			os.Exit(1)
 		}
 
 		return
@@ -72,7 +69,7 @@ func (pl *Plog) logging(lev level.Level, message string) {
 		pl.Logger.Printf("%s %s", prefix(errorTag), message)
 	case level.Fatal:
 		pl.Logger.Printf("%s %s", prefix(fatalTag), message)
-		fatal()
+		os.Exit(1)
 	case level.Panic:
 		pl.Logger.Panicf("%s %s", prefix(panicTag), message)
 	}

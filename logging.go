@@ -7,7 +7,7 @@ import (
 )
 
 func (pl *Plog) Log(lev level.Level, v ...any) {
-	pl.logging(lev, fmt.Sprint(v...))
+	pl.write(lev, fmt.Sprint(v...))
 }
 
 func (pl *Plog) Print(v ...any) {
@@ -43,7 +43,7 @@ func (pl *Plog) Panic(v ...any) {
 }
 
 func (pl *Plog) Logf(lev level.Level, format string, args ...any) {
-	pl.logging(lev, fmt.Sprintf(format, args...))
+	pl.write(lev, fmt.Sprintf(format, args...))
 }
 
 func (pl *Plog) Printf(format string, args ...any) {
@@ -79,7 +79,7 @@ func (pl *Plog) Panicf(format string, args ...any) {
 }
 
 func (pl *Plog) Logln(lev level.Level, v ...any) {
-	pl.logging(lev, fmt.Sprintln(v...))
+	pl.write(lev, fmt.Sprintln(v...))
 }
 
 func (pl *Plog) Println(v ...any) {

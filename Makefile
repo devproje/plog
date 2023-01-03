@@ -1,7 +1,8 @@
 TAG=default
 
-init:
-	go mod tidy
+test:
+	./scripts/setup_test.sh
+	go test
 
 publish:
 	./scripts/publish.sh $(TAG)
